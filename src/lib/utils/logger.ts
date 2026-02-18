@@ -55,6 +55,10 @@ export class Logger {
     this.log(LogLevel.ERROR, message, ...args);
   }
 
+  success(message: string, ...args: any[]): void {
+    this.log(LogLevel.INFO, `✓ ${message}`, ...args);
+  }
+
   setLevel(level: LogLevel): void {
     this.level = level;
   }

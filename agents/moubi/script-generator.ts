@@ -21,8 +21,11 @@ export class ScriptGenerator {
       throw new Error('ANTHROPIC_API_KEY environment variable is required');
     }
 
+    // 支持自定义 API 端点
+    const baseURL = process.env.ANTHROPIC_BASE_URL;
     this.client = new Anthropic({
       apiKey,
+      baseURL,
     });
 
     // 加载提示词模板

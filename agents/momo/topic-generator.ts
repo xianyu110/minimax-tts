@@ -23,8 +23,11 @@ export class TopicGenerator {
       throw new Error('ANTHROPIC_API_KEY environment variable is not set');
     }
 
+    // 支持自定义 API 端点
+    const baseURL = process.env.ANTHROPIC_BASE_URL;
     this.client = new Anthropic({
       apiKey: apiKey,
+      baseURL,
     });
 
     // Load prompt template

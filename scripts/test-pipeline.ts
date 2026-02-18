@@ -13,7 +13,11 @@
  *   npm run test:api     # Test with real APIs
  */
 
+import dotenv from 'dotenv';
 import { createLogger, LogLevel } from '../src/lib/utils/logger.js';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const logger = createLogger('TestPipeline', LogLevel.INFO);
 
@@ -124,8 +128,6 @@ async function testMockScriptGenerator(): Promise<void> {
  */
 async function testMockTTSGenerator(): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 200));
-
-.
 
   const mockAudioPath = '/Users/chinamanor/Downloads/cursor编程/minimax-tts/output/audio/test-audio.mp3';
 
@@ -279,7 +281,7 @@ function printSummary(): void {
 
   if (failedTests > 0) {
     console.log('\nFailed Tests:');
-    test for (const result of testResults) {
+    for (const result of testResults) {
       if (!result.passed) {
         console.log(`  ✗ ${result.name}`);
         console.log(`    ${result.error}`);
@@ -310,14 +312,22 @@ async function main(): Promise<void> {
     await runTest('Mock: Script Generator', testMockScriptGenerator);
     await runTest('Mock: TTS Generator', testMockTTSGenerator);
     await runTest('Mock: Whisper Extractor', testMockWhisperExtractor);
-    await runTest('Mock: Scene Orchestrator', test);
+    await runTest('Mock: Scene Orchestrator', testMockSceneOrchestrator);
+    await runTest('Mock: Remotion Renderer', testMockRemotionRenderer);
   } else if (mode === 'api') {
     // Check for required API keys
-    const requiredKeys = ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'FAL_KEY'];
+    const requiredKeys = ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY'];
+    const ttsKeys = ['MINIMAX_API_KEY', 'FAL_KEY'];
     const missingKeys = requiredKeys.filter((key) => !process.env[key]);
+    const missingTTSKey = !ttsKeys.some((key) => process.env[key]);
 
-    if (missingKeys.length > 0) {
-      logger.error(`Missing required environment variables: ${missingKeys.join(', ')}`);
+    if (missingKeys.length > 0 || missingTTSKey) {
+      if (missingKeys.length > 0) {
+        logger.error(`Missing required environment variables: ${missingKeys.join(', ')}`);
+      }
+      if (missingTTSKey) {
+        logger.error('Missing TTS API key: MINIMAX_API_KEY or FAL_KEY');
+      }
       logger.error('Please configure .env file with required API keys');
       process.exit(1);
     }

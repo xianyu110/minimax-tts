@@ -208,6 +208,9 @@ export class WhisperTimestampExtractor {
 export function createWhisperExtractor(config?: Partial<WhisperConfig>): WhisperTimestampExtractor {
   const apiKey = config?.apiKey || process.env.OPENAI_API_KEY || '';
 
+  // 支持自定义 API 端点
+  const baseUrl = config?.baseUrl || process.env.OPENAI_BASE_URL;
+
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is required. Set it in environment variables or pass it in config.');
   }
@@ -215,7 +218,7 @@ export function createWhisperExtractor(config?: Partial<WhisperConfig>): Whisper
   return new WhisperTimestampExtractor({
     apiKey,
     model: config?.model,
-    baseUrl: config?.baseUrl,
+    baseUrl,
     maxRetries: config?.maxRetries,
     retryDelay: config?.retryDelay,
   });
