@@ -1,0 +1,32 @@
+{
+  "name": "minimax-tts",
+  "version": "1.0.0",
+  "description": "AI Video Automation Production System",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test:mock": "tsx scripts/test-pipeline.ts mock",
+    "test:api": "tsx scripts/test-pipeline.ts api"
+  },
+  "keywords": [
+    "ai",
+    "video",
+    "tts",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "form-data": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

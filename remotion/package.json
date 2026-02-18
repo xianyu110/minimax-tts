@@ -1,0 +1,27 @@
+{
+  "name": "minimax-tts-remotion",
+  "version": "1.0.0",
+  "description": "Remotion video framework for AI Video Automation System",
+  "type": "module",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion bundle",
+    "render": "remotion render",
+    "preview": "remotion preview"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.277",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.277"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config": "^4.0.277",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/node": "^22.10.5",
+    "eslint": "^8.57.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
+  }
+}
